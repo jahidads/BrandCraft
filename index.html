@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandCraft | Build Your Brand Identity</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/animation/2024/03/05/19/42/19-42-49-437_512.gif">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --secondary: #ff006e;
+            --accent: #8338ec;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2.5rem;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            padding: 5px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section with Video Background */
+        .hero {
+            padding: 150px 0 100px;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -1;
+            object-fit: cover;
+            filter: grayscale(0.2) brightness(0.7);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        /* 3D Marquee */
+        .marquee-3d {
+            margin: 40px 0;
+            perspective: 500px;
+            font-size: 0;
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .marquee-3d-container {
+            display: flex;
+            width: 200%;
+        }
+        
+        .marquee-3d-track {
+            display: flex;
+            animation: marquee-scroll 20s linear infinite;
+            width: 100%;
+        }
+        
+        .marquee-3d-item {
+            padding: 15px 25px;
+            margin: 0 10px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            white-space: nowrap;
+            border: 1px solid rgba(255,255,255,0.2);
+            transform: rotateY(-5deg) rotateX(5deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            transform: translateY(-5px);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover:before {
+            transform: translateY(0);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(58,134,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-icon {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Portfolio Section with 3D Marquee */
+        .portfolio {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(58,134,255,0.05) 0%, rgba(131,56,236,0.05) 100%);
+            overflow: hidden;
+        }
+        
+        .portfolio-marquee {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            height: 600px;
+            perspective: 1000px;
+        }
+        
+        .marquee-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .marquee-item:hover {
+            transform: translateZ(20px) rotateX(2deg) rotateY(2deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+        
+        .marquee-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .marquee-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .marquee-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .marquee-item:hover .marquee-overlay {
+            opacity: 1;
+        }
+        
+        .marquee-overlay h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .marquee-overlay p {
+            color: rgba(255,255,255,0.9);
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .stat-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .process-steps:before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+        
+        .step:hover .step-number {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .step h3 {
+            margin-bottom: 10px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(58,134,255,0.05) 0%, rgba(131,56,236,0.05) 100%);
+        }
+        
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-text:before, .testimonial-text:after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+        }
+        
+        .testimonial-text:before {
+            top: -20px;
+            left: -15px;
+        }
+        
+        .testimonial-text:after {
+            bottom: -40px;
+            right: -15px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .testimonial-role {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .testimonial-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+        
+        .cta h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta h2:after {
+            display: none;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta .btn:hover {
+            background: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-column h3:after {
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        /* Video Fallback for Mobile */
+        @media (max-width: 768px) {
+            #hero-video {
+                display: none;
+            }
+            .hero {
+                background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .process-steps:before {
+                display: none;
+            }
+            
+            .marquee-3d-item {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+            
+            .portfolio-marquee {
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 130px 0 80px;
+            }
+            
+            .service-card, .portfolio-item {
+                margin-bottom: 20px;
+            }
+            
+            .marquee-3d {
+                perspective: 300px;
+            }
+            
+            .marquee-3d-item {
+                transform: rotateY(-2deg) rotateX(2deg);
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+            
+            .portfolio-marquee {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 300px);
+                height: auto;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            h2 {
+                font-size: 1.9rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+            }
+            
+            .marquee-3d-track {
+                animation-duration: 15s;
+            }
+            
+            .portfolio-marquee {
+                grid-template-rows: repeat(4, 250px);
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#hero" class="logo">
+                <i class="fas fa-palette"></i>
+                BrandCraft
+            </a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li style="text-align: center; width: 100%;"><a href="#hero">Home</a></li>
+                    <li style="text-align: center; width: 100%;"><a href="#services">Services</a></li>
+                    <li style="text-align: center; width: 100%;"><a href="#featured">Featured</a></li>
+                    <li style="text-align: center; width: 100%;"><a href="#process">Process</a></li>
+                    <li style="text-align: center; width: 100%;"><a href="#testimonials">Testimonials</a></li>
+                    <li style="text-align: center; width: 100%;"><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero" id="hero">
+        <video autoplay muted loop id="hero-video" poster="data:image/gif,AAAA" style="display:block;">
+            <source src="https://cdn.pixabay.com/video/2021/03/08/67358-521707474_tiny.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container hero-content">
+            <h1>Craft Your Unique Brand Identity</h1>
+            <p>We help businesses build memorable brands that resonate with their audience and stand out in competitive markets.</p>
+            
+            <!-- 3D Marquee -->
+            <div class="marquee-3d">
+                <div class="marquee-3d-container">
+                    <div class="marquee-3d-track">
+                        <div class="marquee-3d-item">Logo Design</div>
+                        <div class="marquee-3d-item">Brand Strategy</div>
+                        <div class="marquee-3d-item">Visual Identity</div>
+                        <div class="marquee-3d-item">Typography</div>
+                        <div class="marquee-3d-item">Color Theory</div>
+                        <div class="marquee-3d-item">Brand Guidelines</div>
+                        <div class="marquee-3d-item">Logo Design</div>
+                        <div class="marquee-3d-item">Brand Strategy</div>
+                        <div class="marquee-3d-item">Visual Identity</div>
+                        <div class="marquee-3d-item">Typography</div>
+                        <div class="marquee-3d-item">Color Theory</div>
+                        <div class="marquee-3d-item">Brand Guidelines</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#contact" class="btn">Get Started</a>
+                <a href="#portfolio" class="btn btn-secondary">View Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>We offer comprehensive brand identity solutions tailored to your business needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>Logo Design</h3>
+                    <p>Custom logo designs that capture your brand's essence and make a lasting impression.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Brand Guidelines</h3>
+                    <p>Comprehensive brand books that ensure consistency across all your marketing materials.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Brand Strategy</h3>
+                    <p>Strategic planning to position your brand effectively in the market and connect with your audience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Section with 3D Marquee -->
+    <section class="featured" id="featured">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Featured Work</h2>
+                <p>Explore some of our recent brand identity projects</p>
+            </div>
+            <div class="portfolio-marquee">
+                <div class="marquee-item">
+                    <img src="https://cdn.pixabay.com/photo/2020/04/28/17/38/abstract-5105591_640.jpg" alt="EcoFoods Branding">
+                    <div class="marquee-overlay">
+                        <h3>EcoFoods</h3>
+                        <p>Complete rebrand for organic food company</p>
+                    </div>
+                </div>
+                <div class="marquee-item">
+                    <img src="https://cdn.pixabay.com/photo/2023/01/13/06/58/abstract-7715408_640.jpg" alt="TechSolutions Branding">
+                    <div class="marquee-overlay">
+                        <h3>TechSolutions</h3>
+                        <p>Brand identity for IT consulting firm</p>
+                    </div>
+                </div>
+                <div class="marquee-item">
+                    <img src="https://cdn.pixabay.com/photo/2017/06/05/09/38/pen-2373521_640.jpg" alt="Lumina Branding">
+                    <div class="marquee-overlay">
+                        <h3>Lumina</h3>
+                        <p>Luxury branding for jewelry brand</p>
+                    </div>
+                </div>
+                <div class="marquee-item">
+                    <img src="https://cdn.pixabay.com/photo/2013/03/28/00/15/fractal-97281_640.jpg" alt="UrbanFit Branding">
+                    <div class="marquee-overlay">
+                        <h3>UrbanFit</h3>
+                        <p>Fitness apparel brand identity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="250">0</div>
+                    <div class="stat-text">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="120">0</div>
+                    <div class="stat-text">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-text">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="35">0</div>
+                    <div class="stat-text">Awards Received</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Process</h2>
+                <p>How we create exceptional brand identities for our clients</p>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>We learn about your business, goals, and target audience.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Strategy</h3>
+                    <p>We develop a brand strategy that positions you for success.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Design</h3>
+                    <p>We create visual elements that bring your brand to life.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Implementation</h3>
+                    <p>We help you apply your new brand across all touchpoints.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Client Testimonials</h2>
+                <p>What our clients say about working with us</p>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonial active">
+                    <p class="testimonial-text">BrandCraft transformed our business with a stunning brand identity that perfectly captures who we are. The process was smooth and professional from start to finish.</p>
+                    <p class="testimonial-author">Sarah Johnson</p>
+                    <p class="testimonial-role">CEO, EcoFoods</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">The brand guidelines provided by BrandCraft have been invaluable for maintaining consistency across all our marketing materials. Highly recommend their services!</p>
+                    <p class="testimonial-author">Michael Chen</p>
+                    <p class="testimonial-role">Marketing Director, TechSolutions</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">Working with BrandCraft was a game-changer for our jewelry brand. They understood our vision and created a luxurious identity that resonates with our customers.</p>
+                    <p class="testimonial-author">Emily Rodriguez</p>
+                    <p class="testimonial-role">Founder, Lumina</p>
+                </div>
+                <div class="testimonial-nav">
+                    <div class="testimonial-dot active" data-index="0"></div>
+                    <div class="testimonial-dot" data-index="1"></div>
+                    <div class="testimonial-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Ready to Build Your Brand?</h2>
+            <p>Contact us today to discuss how we can help you create a powerful brand identity that drives growth and connects with your audience.</p>
+            <a href="mailto:jahidads@yahoo.com" class="btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BrandCraft</h3>
+                    <p>We specialize in creating unique brand identities that help businesses stand out and connect with their target audience.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/jahidads1"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/jahidhasan_tw"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/jahidhasan2.0ff/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://bd.linkedin.com/in/jahidads"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Other Websites</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://jahidads.github.io/Portfolio/">Portfolio</a></li>
+                        <li><a href="https://jahidads.github.io/CyberShield/">Cybershield</a></li>
+                        <li><a href="https://jahidads.github.io/CyberShield/">Cybersecpro</a></li>
+                        <li><a href="https://jahidads.github.io/PixelPatch/">Pixelpath</a></li>
+                        <li><a href="https://jahidads.github.io/solida/">SOLIDA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Design Street, Creative City</li>
+                        <li><i class="fas fa-phone"></i> +880 130 883-9759</li>
+                        <li><i class="fas fa-envelope"></i> jahidads@yahoo.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 BrandCraft. Designed by Jahid Hasan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#hero" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetSection = document.querySelector(targetId);
+                if(targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking a link
+                    if(navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Testimonial Slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        let currentTestimonial = 0;
+        
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentTestimonial = index;
+        }
+        
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                showTestimonial(index);
+            });
+        });
+        
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+        
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.service-card, .marquee-item, .step, .stat-item');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if(elementPosition < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.service-card, .marquee-item, .step, .stat-item').forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        window.addEventListener('load', animateOnScroll);
+        
+        // Enhanced 3D effect for portfolio items
+        const marqueeItems = document.querySelectorAll('.marquee-item');
+        
+        marqueeItems.forEach(item => {
+            item.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                item.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateZ(20px)`;
+            });
+            
+            item.addEventListener('mouseenter', () => {
+                item.style.transition = 'none';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
+                item.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0)';
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animated stats counter
+        const statNumbers = document.querySelectorAll('.stat-number');
+        let counted = false;
+        
+        function animateStats() {
+            if (!counted && window.scrollY > document.querySelector('.stats').offsetTop - window.innerHeight + 100) {
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-count'));
+                    const duration = 2000; // 2 seconds
+                    const increment = target / (duration / 16); // 60fps
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.round(current);
+                        }
+                    }, 16);
+                });
+                counted = true;
+            }
+        }
+        
+        window.addEventListener('scroll', animateStats);
+        
+        // Video background fallback for mobile
+        function checkMobile() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('hero-video').style.display = 'none';
+            } else {
+                document.getElementById('hero-video').style.display = 'block';
+            }
+        }
+        
+        window.addEventListener('load', checkMobile);
+        window.addEventListener('resize', checkMobile);
+    </script>
+</body>
+</html>
